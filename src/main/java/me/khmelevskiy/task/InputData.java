@@ -5,8 +5,8 @@ import java.util.Scanner;
 public class InputData {
 
     String inputLine;
-    String ipStart;
-    String ipEnd;
+    String[] ipStart;
+    String[] ipEnd;
 
     ValidationInputData ipValidate = new ValidationInputData();
     Scanner scn = new Scanner(System.in);
@@ -14,7 +14,7 @@ public class InputData {
     public void Scan() {
         InputLine("start");
         if (ipValidate.Check(inputLine)) {
-            ipStart = inputLine;
+            ipStart = inputLine.split("\\.");
         } else {
             System.out.println("Incorrect input, please repeat input!");
             Scan();
@@ -22,9 +22,14 @@ public class InputData {
 
         InputLine("end");
         if (ipValidate.Check(inputLine)) {
-            ipEnd = inputLine;
+            ipEnd = inputLine.split("\\.");
         } else {
             System.out.println("Incorrect input, please repeat input!");
+            Scan();
+        }
+
+        if (!(ipValidate.CheckIpStartEnd(ipStart,ipEnd))) {
+            System.out.println("Incorrect range IP, repeat input!");
             Scan();
         }
     }

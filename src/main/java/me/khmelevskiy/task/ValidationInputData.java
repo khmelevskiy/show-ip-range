@@ -29,5 +29,21 @@ public class ValidationInputData {
             }
         }
         return true;
+
+    }
+
+    public boolean CheckIpStartEnd(String[] ipStart, String[] ipEnd) {
+        if (ConvertToNumber(ipStart) <= ConvertToNumber(ipEnd)) {
+            return true;
+        }
+        return false;
+    }
+
+    private int ConvertToNumber(String[] str) {
+        String ipNumber = "";
+        for (String temp : str) {
+            ipNumber += temp;
+        }
+        return Integer.parseInt(ipNumber);
     }
 }
