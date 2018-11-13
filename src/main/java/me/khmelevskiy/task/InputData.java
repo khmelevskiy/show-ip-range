@@ -28,13 +28,13 @@ public class InputData {
             Scan();
         }
 
-        if (!(ipValidate.CheckIpStartEnd(ipStart,ipEnd))) {
+        if (!(ipValidate.CheckIpStartEnd(ipStart, ipEnd))) {
             System.out.println("Incorrect range IP, repeat input!");
             Scan();
         }
     }
 
-    public void InputLine(String str) {
+    private void InputLine(String str) {
         System.out.println("Enter ip " + str + " range\nFormat XXX.XXX.XXX.XXX\nMin value: 1.0.0.0\nMax value: 223.255.255.255:");
         inputLine = scn.nextLine();
     }

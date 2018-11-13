@@ -18,7 +18,7 @@ public class ValidationInputData {
         return true;
     }
 
-    public boolean CheckRangeIP(int value, int checkOneValueIP) {
+    private boolean CheckRangeIP(int value, int checkOneValueIP) {
         if (checkOneValueIP > 0 && checkOneValueIP <= 3) {
             if (!(value >= 0 && value <= 255)) {
                 return false;
@@ -29,21 +29,33 @@ public class ValidationInputData {
             }
         }
         return true;
-
     }
 
-    public boolean CheckIpStartEnd(String[] ipStart, String[] ipEnd) {
-        if (ConvertToNumber(ipStart) <= ConvertToNumber(ipEnd)) {
-            return true;
+    public boolean CheckIpStartEnd(String[] ipStart, String[] ipEnd) {//error!!!
+        int[] ipStartInt = ConvertToInt(ipStart);
+        int[] ipEndInt = ConvertToInt(ipEnd);
+        for (int i = 0; i < 4; i++) {
+            if (ipStartInt[i] > ipEndInt[i] && !Check(ipStartInt, ipEndInt)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean Check(int[] ipStart, int[] ipEnd) {
+        for (int i = 0; i < 4; i++) {
+            if (ipStart[i] < ipEnd[i]) {
+                return true;
+            }
         }
         return false;
     }
 
-    private int ConvertToNumber(String[] str) {
-        String ipNumber = "";
-        for (String temp : str) {
-            ipNumber += temp;
+    private int[] ConvertToInt(String[] str) {
+        int[] ip = new int[4];
+        for (int i = 0; i < str.length; i++) {
+            ip[i] = Integer.parseInt(str[i]);
         }
-        return Integer.parseInt(ipNumber);
+        return ip;
     }
 }
